@@ -5,7 +5,7 @@ import { Works } from "./works";
 import { WorkTypes } from "./types";
 
 export class SourceRenderer {
-  constructor(private uri: string, private containerId: string) { }
+  constructor(private uri: string, private containerId: string, private transform: any) { }
 
   async render(language: string = "en"): Promise<void> {
     try {
@@ -13,6 +13,11 @@ export class SourceRenderer {
         headers: { Accept: "application/ld+json" },
       });
       const data = await response.json() as SourceTypes.SourceData;
+
+      if(typeof this.transform === "function") {
+        this.transform(data);
+      }
+
       const source = new Sources.Source(data);
       const container = document.getElementById(this.containerId);
 

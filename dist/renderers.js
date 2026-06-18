@@ -1,9 +1,10 @@
 import { Sources } from "./sources";
 import { Works } from "./works";
 export class SourceRenderer {
-    constructor(uri, containerId) {
+    constructor(uri, containerId, transform) {
         this.uri = uri;
         this.containerId = containerId;
+        this.transform = transform;
     }
     async render(language = "en") {
         try {
@@ -11,6 +12,9 @@ export class SourceRenderer {
                 headers: { Accept: "application/ld+json" },
             });
             const data = await response.json();
+            if (typeof this.transform === "function") {
+                this.transform(data);
+            }
             const source = new Sources.Source(data);
             const container = document.getElementById(this.containerId);
             if (!container) {
