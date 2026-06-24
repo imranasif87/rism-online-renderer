@@ -11,9 +11,9 @@ export class SourceRenderer {
             const response = await fetch(this.uri, {
                 headers: { Accept: "application/ld+json" },
             });
-            const data = await response.json();
+            let data = await response.json();
             if (typeof this.transform === "function") {
-                this.transform(data);
+                data = await this.transform(data);
             }
             const source = new Sources.Source(data);
             const container = document.getElementById(this.containerId);
@@ -29,16 +29,20 @@ export class SourceRenderer {
     }
 }
 export class WorkRenderer {
-    constructor(uri, containerId) {
+    constructor(uri, containerId, transform) {
         this.uri = uri;
         this.containerId = containerId;
+        this.transform = transform;
     }
     async render(language = "en") {
         try {
             const response = await fetch(this.uri, {
                 headers: { Accept: "application/ld+json" },
             });
-            const data = await response.json();
+            let data = await response.json();
+            if (typeof this.transform === "function") {
+                data = await this.transform(data);
+            }
             const work = new Works.Work(data);
             const container = document.getElementById(this.containerId);
             if (!container) {

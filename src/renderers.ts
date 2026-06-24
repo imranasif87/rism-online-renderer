@@ -12,10 +12,10 @@ export class SourceRenderer {
       const response = await fetch(this.uri, {
         headers: { Accept: "application/ld+json" },
       });
-      const data = await response.json() as SourceTypes.SourceData;
+      let data = await response.json() as SourceTypes.SourceData;
 
       if(typeof this.transform === "function") {
-        this.transform(data);
+        data = await this.transform(data);
       }
 
       const source = new Sources.Source(data);
@@ -34,14 +34,19 @@ export class SourceRenderer {
 }
 
 export class WorkRenderer {
-  constructor(private uri: string, private containerId: string) { }
+  constructor(private uri: string, private containerId: string, private transform: any) { }
 
   async render(language: string = "en"): Promise<void> {
     try {
       const response = await fetch(this.uri, {
         headers: { Accept: "application/ld+json" },
       });
-      const data = await response.json() as WorkTypes.WorkData;
+      let data = await response.json() as WorkTypes.WorkData;
+
+      if(typeof this.transform === "function") {
+        data = await this.transform(data);
+      }
+
       const work = new Works.Work(data);
       const container = document.getElementById(this.containerId);
 
