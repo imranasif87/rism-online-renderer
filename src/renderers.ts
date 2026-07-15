@@ -43,7 +43,7 @@ export class WorkRenderer {
       });
       let data = await response.json() as WorkTypes.WorkData;
 
-      if(typeof this.transform === "function") {
+      if (typeof this.transform === "function") {
         data = await this.transform(data);
       }
 
