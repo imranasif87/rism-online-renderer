@@ -14,7 +14,7 @@ export class SourceRenderer {
       });
       let data = await response.json() as SourceTypes.SourceData;
 
-      if(typeof this.transform === "function") {
+      if (typeof this.transform === "function") {
         data = await this.transform(data);
       }
 
