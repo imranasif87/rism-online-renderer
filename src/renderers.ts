@@ -5,7 +5,7 @@ import { Works } from "./works";
 import { WorkTypes } from "./types";
 
 export class SourceRenderer {
-  constructor(private uri: string, private containerId: string, private transform: any) { }
+  constructor(private uri: string, private containerId: string, private transform: (data: any) => any) { }
 
   async render(language: string = "en"): Promise<void> {
     try {
@@ -34,7 +34,7 @@ export class SourceRenderer {
 }
 
 export class WorkRenderer {
-  constructor(private uri: string, private containerId: string, private transform: any) { }
+  constructor(private uri: string, private containerId: string, private transform: (data: any) => any) { }
 
   async render(language: string = "en"): Promise<void> {
     try {
