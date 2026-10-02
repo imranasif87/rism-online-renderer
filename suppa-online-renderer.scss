@@ -1,0 +1,160 @@
+// suppa-online-renderer.scss
+//
+// Styles for supplementary content, rendered alongside RISM
+// records via `.suppa`-marked elements (see SuppAElement in suppa-common.ts).
+// Scoped entirely under .suppa — never matches plain .ro-* RISM output.
+
+$suppa-accent: #8a6d3b;
+$suppa-bg: #fdf6e3;
+$suppa-border: darken($suppa-bg, 15%);
+$suppa-muted: #6b6b6b;
+
+.suppa {
+    font-size: 0.95rem;
+    color: #333;
+
+    // Top-level entity containers: Work, Person, Performance,
+    // Correspondence, Place, Postcard, Recording
+    &.ro-work,
+    &.ro-person,
+    &.ro-performance,
+    &.ro-correspondence,
+    &.ro-place,
+    &.ro-postcard,
+    &.ro-recording {
+        display: block;
+        background: $suppa-bg;
+        border-left: 3px solid $suppa-accent;
+        border-radius: 2px;
+        padding: 0.75rem 1rem;
+        margin: 0.75rem 0;
+
+        &::before {
+            content: "Supplementary data";
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: $suppa-accent;
+            margin-bottom: 0.35rem;
+        }
+    }
+
+    // Relationship lists — render as a compact tag-like row
+    &.ro-relationships {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin: 0.5rem 0;
+    }
+
+    &.ro-relationship {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.4rem;
+        padding: 0.35rem 0.5rem;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid $suppa-border;
+        border-radius: 3px;
+        font-size: 0.85rem;
+
+        // role / qualifier act like small labels
+        >div:first-child {
+            font-weight: 600;
+            color: $suppa-accent;
+        }
+    }
+
+    // Inline reference / link wrapper
+    &.ro-reference {
+        display: inline;
+
+        a {
+            color: $suppa-accent;
+            text-decoration: underline;
+
+            &:hover {
+                color: darken($suppa-accent, 10%);
+            }
+        }
+    }
+
+    // Item location (Correspondence, Postcard)
+    &.ro-itemlocation {
+        display: block;
+        font-size: 0.85rem;
+        color: $suppa-muted;
+        margin: 0.35rem 0;
+
+        div {
+            display: inline;
+
+            &:not(:last-child)::after {
+                content: " · ";
+            }
+        }
+    }
+
+    // Citation / literature / reviews entries
+    &.ro-citation,
+    &.ro-titleditem {
+        padding: 0.15rem 0;
+        font-style: italic;
+        color: $suppa-muted;
+
+        &::before {
+            content: "— ";
+            font-style: normal;
+        }
+    }
+
+    // Person-specific: activity-by-place and events blocks
+    &.ro-activitybyplace,
+    &.ro-events,
+    &.ro-documents,
+    &.ro-evidence {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    &.ro-activitybyplaceitem,
+    &.ro-eventitem,
+    &.ro-documentitem,
+    &.ro-evidenceitem {
+        padding: 0.35rem 0;
+        border-bottom: 1px dashed $suppa-border;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    // Free-text note fields shared across most entities
+    // (workNotes, personNotes, notes, biographyNote, description)
+    &.ro-work,
+    &.ro-person,
+    &.ro-performance,
+    &.ro-correspondence,
+    &.ro-place,
+    &.ro-postcard,
+    &.ro-recording {
+        div:last-child:not(.ro-relationships):not(.ro-reference) {
+            font-size: 0.85rem;
+            color: $suppa-muted;
+            margin-top: 0.5rem;
+        }
+    }
+
+    // Audio access (Recording)
+    &.ro-audioaccess {
+        display: block;
+        margin-top: 0.5rem;
+
+        a {
+            font-weight: 600;
+            color: $suppa-accent;
+        }
+    }
+}

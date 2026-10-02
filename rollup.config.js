@@ -25,4 +25,14 @@ export default [
       resolve(),
       commonjs()
     ],
-  }];
+  },
+  {
+    input: 'dist/suppa-renderers.js',
+    output: {
+      file: './suppa-online-renderer.js',
+      format: 'iife',
+      name: 'SuppAOnline',
+    },
+    plugins: [resolve(), commonjs()],
+  },
+];

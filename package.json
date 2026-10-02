@@ -11,8 +11,24 @@
     "build:schema:work": "npx typescript-json-schema tsconfig.json WorkTypes.WorkData --out schemas/work.schema.json --required",
     "build:schema-no-extra:work": "npx typescript-json-schema tsconfig.json WorkTypes.WorkData --out schemas/work.schema-no-extra.json --required --noExtraProps",
     "build:schemas": "npm run build:schema:source && npm run build:schema-no-extra:source && npm run build:schema:work && npm run build:schema-no-extra:work",
-    "copy:scss": "cp rism-online-renderer.scss jekyll-rism-online-renderer/_sass/_rism-online-renderer.scss",
-    "copy:js": "cp rism-online-renderer.js jekyll-rism-online-renderer/assets/rism-online-renderer/js/"
+    "build:schema:suppa-work": "npx typescript-json-schema tsconfig.json SuppATypes.WorkData --out schemas/suppa-work.schema.json --required",
+    "build:schema-no-extra:suppa-work": "npx typescript-json-schema tsconfig.json SuppATypes.WorkData --out schemas/suppa-work.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-person": "npx typescript-json-schema tsconfig.json SuppATypes.PersonData --out schemas/suppa-person.schema.json --required",
+    "build:schema-no-extra:suppa-person": "npx typescript-json-schema tsconfig.json SuppATypes.PersonData --out schemas/suppa-person.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-performance": "npx typescript-json-schema tsconfig.json SuppATypes.PerformanceData --out schemas/suppa-performance.schema.json --required",
+    "build:schema-no-extra:suppa-performance": "npx typescript-json-schema tsconfig.json SuppATypes.PerformanceData --out schemas/suppa-performance.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-correspondence": "npx typescript-json-schema tsconfig.json SuppATypes.CorrespondenceData --out schemas/suppa-correspondence.schema.json --required",
+    "build:schema-no-extra:suppa-correspondence": "npx typescript-json-schema tsconfig.json SuppATypes.CorrespondenceData --out schemas/suppa-correspondence.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-place": "npx typescript-json-schema tsconfig.json SuppATypes.PlaceData --out schemas/suppa-place.schema.json --required",
+    "build:schema-no-extra:suppa-place": "npx typescript-json-schema tsconfig.json SuppATypes.PlaceData --out schemas/suppa-place.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-postcard": "npx typescript-json-schema tsconfig.json SuppATypes.PostcardData --out schemas/suppa-postcard.schema.json --required",
+    "build:schema-no-extra:suppa-postcard": "npx typescript-json-schema tsconfig.json SuppATypes.PostcardData --out schemas/suppa-postcard.schema-no-extra.json --required --noExtraProps",
+    "build:schema:suppa-recording": "npx typescript-json-schema tsconfig.json SuppATypes.RecordingData --out schemas/suppa-recording.schema.json --required",
+    "build:schema-no-extra:suppa-recording": "npx typescript-json-schema tsconfig.json SuppATypes.RecordingData --out schemas/suppa-recording.schema-no-extra.json --required --noExtraProps",
+    "build:schemas:suppa": "npm run build:schema:suppa-work && npm run build:schema-no-extra:suppa-work && npm run build:schema:suppa-person && npm run build:schema-no-extra:suppa-person && npm run build:schema:suppa-performance && npm run build:schema-no-extra:suppa-performance && npm run build:schema:suppa-correspondence && npm run build:schema-no-extra:suppa-correspondence && npm run build:schema:suppa-place && npm run build:schema-no-extra:suppa-place && npm run build:schema:suppa-postcard && npm run build:schema-no-extra:suppa-postcard && npm run build:schema:suppa-recording && npm run build:schema-no-extra:suppa-recording",
+    "build:schemas:all": "npm run build:schemas && npm run build:schemas:suppa",
+    "copy:scss": "cp rism-online-renderer.scss jekyll-rism-online-renderer/_sass/_rism-online-renderer.scss && cp suppa-online-renderer.scss jekyll-rism-online-renderer/_sass/_suppa-online-renderer.scss",
+    "copy:js": "cp rism-online-renderer.js jekyll-rism-online-renderer/assets/rism-online-renderer/js/ && cp suppa-online-renderer.js jekyll-rism-online-renderer/assets/rism-online-renderer/js/"
   },
   "type": "module"
 }
